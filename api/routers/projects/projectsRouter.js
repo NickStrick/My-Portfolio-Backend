@@ -4,7 +4,7 @@ const router = express.Router();
 
 module.exports = router;
 
-const db = require('../../data/helpers/schoolModel.js');
+const db = require('./projectsModel.js');
 
 router.route('/')
     .get(get)
