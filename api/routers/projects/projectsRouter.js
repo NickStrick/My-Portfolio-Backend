@@ -8,14 +8,14 @@ const db = require('../../data/helpers/schoolModel.js');
 
 router.route('/')
     .get(get)
-    .post(add)
+    // .post(add)
     ;
 
-router.route('/:id')
-    .get(getId)
-    .delete(remove)
-    .put(update)
-    ;
+// router.route('/:id')
+//     .get(getId)
+//     .delete(remove)
+//     .put(update)
+//     ;
 
 
 // Functions
