@@ -65,11 +65,27 @@ describe('server.js', () => {
 
     describe('Put /projects/:id endpoint', () => {
         it('should return status code 201', async () => {
+            let user = await request(server).get('/projects/:id')
+            console.log(user)
 
+            await request(server).post('/projects').send({ name: 'this is a new name', address: 'platformer', requested_funds: 1999 })
+            let response = await request(server).put('/projects/1').send({ name: 'this is a new name' })
+            expect(response.status).toBe(203);
         })
 
         it('should insert provided project', async () => {
+            const { id } = await projectDb.add({ name: 'this is a name', address: '123 road island', requested_funds: 2000 })
+            await projectDb.update(id, { name: 'this is an updated name' })
 
+            let project = await projectDb.get(id)
+
+            expect(project.name).toEqual('this is an updated name');
+
+            const two = await projectDb.add({ name: 'this is a second name', address: '123 road island', requested_funds: 2000 });
+            await projectDb.update(two.id, { name: 'this is another updated name' })
+            project = await projectDb.get(two.id);
+
+            expect(project.name).toEqual('this is another updated name');
         })
     })
 });
