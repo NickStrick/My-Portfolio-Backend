@@ -31,14 +31,35 @@ describe('server.js', () => {
     describe('Post /projects endpoint', () => {
         it('should return status code 201', async () => {
 
+            let response = await request(server).post('/projects').send({ name: 'this is a new name', address: 'platformer', requested_funds: 1999 })
+
+            expect(response.status).toBe(201);
         })
 
         it('should insert provided project', async () => {
+            const { id } = await projectDb.add({ name: 'this is a name', address: '123 road island', requested_funds: 2000 })
+            const project = await projectDb.get(id)
 
+            let projects = await projectDb.get();
+
+            expect(projects).toHaveLength(1);
+            expect(project.name).toEqual('this is a name');
+
+            await projectDb.add({ name: 'this is a second name', address: '123 road island', requested_funds: 2000 });
+            projects = await projectDb.get();
+
+            expect(projects).toHaveLength(2);
         })
 
         it('should have a unique name', async () => {
 
+            await request(server).post('/projects')
+                .send({ name: 'this is a name', address: '123 road island', requested_funds: 2000 })
+            let response = await request(server).post('/projects')
+                .send({ name: 'this is a name', address: '123 road island', requested_funds: 2000 })
+
+            expect(response.status).toBe(405);
+            expect(response.body.msg).toBe('name must be unique');
         })
     })
 });
