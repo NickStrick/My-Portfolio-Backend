@@ -1,6 +1,6 @@
 const request = require('superTest');
 const db = require('../../../data/dbConfig.js');
-const schoolDb = require('./projectsModel.js');
+const projectDb = require('./projectsModel.js');
 const server = require('../../server.js');
 
 afterEach(async () => {
@@ -24,6 +24,21 @@ describe('server.js', () => {
             let response = await request(server).get('/projects');
 
             expect(response.body).toMatchObject(expected);
+        })
+    })
+
+
+    describe('Post /projects endpoint', () => {
+        it('should return status code 201', async () => {
+
+        })
+
+        it('should insert provided project', async () => {
+
+        })
+
+        it('should have a unique name', async () => {
+
         })
     })
 });
