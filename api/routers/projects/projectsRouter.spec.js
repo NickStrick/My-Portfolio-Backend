@@ -62,4 +62,14 @@ describe('server.js', () => {
             expect(response.body.msg).toBe('name must be unique');
         })
     })
+
+    describe('Put /projects/:id endpoint', () => {
+        it('should return status code 201', async () => {
+
+        })
+
+        it('should insert provided project', async () => {
+
+        })
+    })
 });
