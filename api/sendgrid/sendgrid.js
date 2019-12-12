@@ -13,7 +13,7 @@ module.exports = router;
 router.post('/', sendEmail);
 
 async function sendEmail(req, res) {
-    const { msg } = req.body;
+    const { msg_body } = req.body;
     // let toEmail;
     // let fromEmail;
     // let fromUser;
@@ -27,7 +27,7 @@ async function sendEmail(req, res) {
             to: 'strickerdev@gmail.com',
             from: 'mymphydreamers@gmail.com',
             subject: 'Someone from your protfolio wants to contact you!',
-            text: `${msg} `,
+            text: `${msg_body} `,
         };
 
         sgMail.send(msg);
