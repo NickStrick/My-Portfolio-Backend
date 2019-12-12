@@ -4,11 +4,15 @@ exports.up = function (knex) {
         tbl.increments();
 
         tbl.string('name', 255).notNullable().unique();
-        tbl.string('description', 128).notNullable();
+        tbl.text('description').notNullable();
         tbl.string('img');
         tbl.string('link').notNullable();
         tbl.string('deployed');
         tbl.string('role');
+        tbl.text('techUsed');
+        tbl.integer('team_members');
+        tbl.integer('weeks_completed');
+        tbl.text('contribution');
     })
 };
 
