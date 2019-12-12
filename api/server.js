@@ -10,6 +10,7 @@ server.use(cors());
 server.use(express.json());
 
 const projectRouter = require('./routers/projects/projectsRouter.js');
+const sendEmail = require('./sendgrid/sendgrid.js');
 
 //routes
 server.get('/', (req, res) => {
@@ -17,5 +18,6 @@ server.get('/', (req, res) => {
 })
 
 server.use('/projects', projectRouter);
+server.use("/mail", sendEmail);
 
 module.exports = server;
