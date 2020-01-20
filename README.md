@@ -44,3 +44,10 @@
             role: 'role Nick Stricker had in the project'
         }
         ```
+## Heroku
+ - heroku git:remote -a app
+ - git push heroku master
+ - heroku run knex migrate:latest
+ - heroku run knex seed:run
+ - heroku open
+ - https://codeselfstudy.com/blog/deploy-node-postgres-heroku/
