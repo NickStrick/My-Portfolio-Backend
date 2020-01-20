@@ -50,4 +50,5 @@
  - heroku run knex migrate:latest
  - heroku run knex seed:run
  - heroku open
+ - heroku pg:info
  - https://codeselfstudy.com/blog/deploy-node-postgres-heroku/
