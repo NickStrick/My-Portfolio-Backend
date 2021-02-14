@@ -5,7 +5,7 @@ exports.up = function (knex) {
 
         tbl.string('name', 255);
         tbl.string('phone', 255);
-        tbl.string('email', 255);
+        tbl.string('email', 255).notNullable();
         tbl.text('message');
     })
 
