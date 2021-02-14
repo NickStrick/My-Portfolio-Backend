@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
 module.exports = router;
@@ -22,16 +24,21 @@ function get(req, res) {
 
 function add(req, res) {
     const { phone, email, message, firstName, lastName } = req.body;
-    const info = {
-        name: firstName + ' ' + lastName,
-        phone,
-        email,
-        message
-    };
-    console.log(info)
-    db.add(info)
-        .then(result => {
-            res.status(200).json(1);
-        })
-        .catch(err => res.status(500).json({ msg: 'cant add to contact table', err }));
+    
+    //sendgrid mail send
+    const msg = {
+      to: 'strickerdev@gmail.com', // Change to your recipient
+      from: 'strickerdevdeploy@gmail.com', // Change to your verified sender
+      subject: `Portfolio website mail - ${firstName + ' ' + lastName}`,
+      text: `${message} - Contacts:${phone && phone} ${email}`,
+      html: `<strong>${message} - Contacts:  ${phone && phone} ${email}</strong>`,
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        res.status(200).json('Email Sent');
+      })
+      .catch((error) => {
+        res.status(500).json(error);
+      })
 }
