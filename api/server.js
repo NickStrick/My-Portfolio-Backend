@@ -20,6 +20,5 @@ server.get('/', (req, res) => {
 
 server.use('/projects', projectRouter);
 server.use('/contact', contactRouter);
-server.use("/mail", sendEmail);
 
 module.exports = server;
