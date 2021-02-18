@@ -31,7 +31,7 @@ function add(req, res) {
       from: 'strickerdevdeploy@gmail.com', // Change to your verified sender
       subject: `Portfolio website mail - ${firstName + ' ' + lastName}`,
       text: `${message} - Contacts:${phone && phone} ${email}`,
-      html: `<strong>${message} <br>- Contacts:  ${phone && phone} ${email}</strong>`,
+      html: `<p>${message}</p> <br><strong>- Contacts:  ${phone && phone} ${email}</strong>`,
     }
     sgMail
       .send(msg)
